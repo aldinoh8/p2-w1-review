@@ -2,12 +2,14 @@ package config
 
 import (
 	"database/sql"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func InitDatabase() *sql.DB {
-	db, err := sql.Open("mysql", "mysql:mysql@tcp(127.0.0.1:3306)/ftgo_p2_week1_db?parseTime=true")
+	db, err := sql.Open("mysql", os.Getenv("DB"))
 
 	// if there is an error opening the connection, handle it
 	if err != nil {
